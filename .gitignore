@@ -1,3 +1,6 @@
+*.tmp
+*.txt
+*.bkp
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
