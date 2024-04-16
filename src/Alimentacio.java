@@ -1,6 +1,4 @@
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Alimentacio extends Producte {
     private String dataCaducitat;
