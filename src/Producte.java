@@ -1,9 +1,9 @@
 public abstract class Producte {
     protected float preu;
     protected String nom;
-    protected String codi;
+    protected int codi;
 
-    public Producte(int preu, String nom, String codi) {
+    public Producte(float preu, String nom, int codi) {
         this.preu = preu;
         this.nom = nom;
         this.codi = codi;
@@ -25,11 +25,11 @@ public abstract class Producte {
         this.nom = nom;
     }
 
-    public String getCodi() {
+    public int getCodi() {
         return codi;
     }
 
-    public void setCodi(String codi) {
+    public void setCodi(int codi) {
         this.codi = codi;
     }
 }
