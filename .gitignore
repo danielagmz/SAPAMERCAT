@@ -1,6 +1,7 @@
 *.tmp
 *.txt
 *.bkp
+src/Prueba.java
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
