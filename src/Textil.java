@@ -1,7 +1,7 @@
 public class Textil extends Producte {
     private String composicio;
 
-    public Textil(int preu, String nom, int codi, String composicio) {
+    public Textil(float preu, String nom, int codi, String composicio) {
         super(preu, nom, codi);
         this.composicio = composicio;
     }
@@ -12,5 +12,10 @@ public class Textil extends Producte {
 
     public void setComposicio(String composicio) {
         this.composicio = composicio;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Nom: %s,Preu: %.2f€,Composicio: %s",nom,preu,composicio);
     }
 }

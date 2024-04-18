@@ -1,17 +1,27 @@
 public class Electronica extends Producte{
     private float diesGarantia;
 
-    public Electronica(int preu, String nom, int codi, float diesGarantia) {
+    public Electronica(float preu, String nom, int codi, float diesGarantia) {
         super(preu, nom, codi);
         this.diesGarantia = diesGarantia;
     }
 
-    public float getDiesGarantia() {
+    public  float getPreu(){
 
         return (float) (preu + preu*(diesGarantia/365)*0.1);
+    }
+
+    public float getDiesGarantia() {
+        return diesGarantia;
     }
 
     public void setDiesGarantia(int diesGarantia) {
         this.diesGarantia = diesGarantia;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Nom: %s,Preu: %.2f€,Dies de garantia: %s",nom,getPreu(),diesGarantia);
+    }
 }
+

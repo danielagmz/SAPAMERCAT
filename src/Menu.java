@@ -20,6 +20,7 @@ public class Menu {
 
 
         do {
+            System.out.print("> ");
             opcio= utilities.introducirNumeroEntero(scan, 3, 0, false);
             //todo
             switch (opcio){
@@ -28,7 +29,7 @@ public class Menu {
                 break;
 
                 case 0:
-                    System.out.println("Hasta pronto!");
+                    System.out.println("Fins aviat!");
                 break;
             }
 
@@ -37,13 +38,8 @@ public class Menu {
     }
 
     static void submenu(){
-        Producte product;
         int opcio;
         int input;
-        String nom;
-        String dataCaducitat;
-        float preu;
-        int codiB;
 
         do {
             System.out.println("--------------");
@@ -54,45 +50,116 @@ public class Menu {
             System.out.println("3) Electronica");
             System.out.println("0) Tornar");
 
+            System.out.print("> ");
             opcio= utilities.introducirNumeroEntero(scan, 3, 0, false);
             switch (opcio){
                 //todo comprobaciones
                 case 1:
                     System.out.println("Afergir aliment");
-                    System.out.print("Nom producte: ");
-                    nom=scan.next().trim();
-
-                    System.out.print("Preu: ");
-                    preu=scan.nextFloat();
-                    scan.nextLine();
-                    System.out.print("Codi de barres: ");
-                    codiB=scan.nextInt();
-                    scan.nextLine();
-                    System.out.print("Data de caducitat (dd/mm/aaaa): ");
-                    dataCaducitat=scan.nextLine();
-
-                    try {
-                       Carrito.inserirProducte(new Alimentacio(preu,nom,codiB,dataCaducitat));
-                    }catch (Exception e){
-                        System.out.println(e.getMessage());
-                    }
-
-                    //region mostrar lista para ver si funciona
-                    for (Integer item : Carrito.lista.keySet()) {
-                        System.out.println(item+"="+Carrito.lista.get(item));
-                    }
-                    //endregion
+                    introduirAlimentacio();
+                    break;
+                case 2:
+                    System.out.println("Afegir Textil");
+                    introduirTextil();
+                    break;
+                case 3:
+                    System.out.println("Afegir electrònica");
+                    introduirElectronica();
                     break;
                 case 0:
                     menuPrincipal();
                     break;
             }
         } while (opcio!=0);
+    }
 
+    private static void introduirTextil() {
+        String nom;
+        String comp;
+        float preu;
+        int codiB;
+
+
+        System.out.print("Nom producte: ");
+        nom=scan.nextLine();
+
+        System.out.print("Preu: ");
+        preu=scan.nextFloat();
+        scan.nextLine();
+
+        System.out.print("Composicio: ");
+        comp=scan.nextLine();
+
+        System.out.print("Codi de barres: ");
+        codiB=scan.nextInt();
+        scan.nextLine();
+
+
+
+        try {
+            Carrito.inserirProducte(new Textil(preu,nom,codiB,comp));
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
     }
-//
 
+    private static void introduirAlimentacio(){
+        String nom;
+        String dataCaducitat;
+        float preu;
+        int codiB;
+
+
+        System.out.print("Nom producte: ");
+        nom=scan.nextLine();
+
+        System.out.print("Preu: ");
+        preu=scan.nextFloat();
+        scan.nextLine();
+        System.out.print("Codi de barres: ");
+        codiB=scan.nextInt();
+        scan.nextLine();
+
+        System.out.print("Data de caducitat (dd/mm/aaaa): ");
+        dataCaducitat=scan.nextLine();
+
+        try {
+            Carrito.inserirProducte(new Alimentacio(preu,nom,codiB,dataCaducitat));
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+    private static void introduirElectronica(){
+        String nom;
+        int garantia;
+        float preu;
+        int codiB;
+
+
+        System.out.print("Nom producte: ");
+        nom=scan.nextLine();
+
+        System.out.print("Preu: ");
+        preu=scan.nextFloat();
+        scan.nextLine();
+
+        System.out.print("Garantia (dies): ");
+        garantia=scan.nextInt();
+        scan.nextLine();
+
+        System.out.print("Codi de barres: ");
+        codiB=scan.nextInt();
+        scan.nextLine();
+
+
+        try {
+            Carrito.inserirProducte(new Electronica(preu,nom,codiB,garantia));
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 

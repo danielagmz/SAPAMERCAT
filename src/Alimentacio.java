@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 public class Alimentacio extends Producte {
     private String dataCaducitat;
@@ -10,12 +12,15 @@ public class Alimentacio extends Producte {
     /*ToDo probar si da bien el precio
     */
     public float getPreu() {
-        //todo no dan los calculos y no entiendo por que
-        int dataActual=LocalDate.now().getDayOfMonth();
+        LocalDate dataActual=LocalDate.now();
         String[] fecha =dataCaducitat.split("[/-]");
         int dia= Integer.parseInt(fecha[0]);
+        int mes= Integer.parseInt(fecha[1]);
+        int anio= Integer.parseInt(fecha[2]);
 
-        return (float) (preu - preu*(1/(dia-dataActual+1)) + (preu * 0.1));
+        LocalDate caduc = LocalDate.of(anio, mes, dia);
+        long difDias= ChronoUnit.DAYS.between(caduc,dataActual);
+        return  preu - (float)(preu*(1/(difDias+1)) + (preu * 0.1));
     }
 
     public String getDataCaducitat() {
