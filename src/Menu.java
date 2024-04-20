@@ -27,6 +27,9 @@ public class Menu {
                 case 1:
                     submenu();
                 break;
+                case 3:
+                    Carrito.mostrarCarret();
+                    break;
 
                 case 0:
                     System.out.println("Fins aviat!");

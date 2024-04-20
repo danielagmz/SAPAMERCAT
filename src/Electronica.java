@@ -7,7 +7,6 @@ public class Electronica extends Producte{
     }
 
     public  float getPreu(){
-
         return (float) (preu + preu*(diesGarantia/365)*0.1);
     }
 
