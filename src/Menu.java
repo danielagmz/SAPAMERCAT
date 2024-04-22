@@ -8,6 +8,7 @@ public class Menu {
 
     public static void menuPrincipal(){
         int opcio;
+
         do {
             System.out.println("-----------");
             System.out.println("-- INICI --");
@@ -96,7 +97,7 @@ public class Menu {
 
 
         try {
-            Carrito.inserirProducte(new Textil(preu,nom,codiB,comp));
+            Compra.inserirProducte(new Textil(preu,nom,codiB,comp));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -124,7 +125,7 @@ public class Menu {
         dataCaducitat=scan.nextLine();
 
         try {
-            Carrito.inserirProducte(new Alimentacio(preu,nom,codiB,dataCaducitat));
+            Compra.inserirProducte(new Alimentacio(preu,nom,codiB,dataCaducitat));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -154,7 +155,7 @@ public class Menu {
 
 
         try {
-            Carrito.inserirProducte(new Electronica(preu,nom,codiB,garantia));
+            Compra.inserirProducte(new Electronica(preu,nom,codiB,garantia));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
