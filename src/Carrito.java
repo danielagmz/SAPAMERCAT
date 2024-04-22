@@ -13,7 +13,7 @@ public class Carrito {
         compraLista.add(producte);
         //todo aqui tengo que de alguna manera mirar que si hay repetidos sea por el codigo de barras y no por el nombre
         // hay que implementar una funcion que busque el nombre del producto por codigo de barras, quiza
-        // usar esa para que en funciojn del codigo de barras añada el nombre al hasmap
+        // usar esa para que en funcion del codigo de barras añada el nombre al hasmap
 
 
         if (!(carretLista.containsKey(producte.getNom()))) {

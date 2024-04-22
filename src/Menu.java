@@ -8,18 +8,15 @@ public class Menu {
 
     public static void menuPrincipal(){
         int opcio;
-
-        System.out.println("-----------");
-        System.out.println("-- INICI --");
-        System.out.println("-----------");
-        System.out.println("1) Introduir producte");
-        System.out.println("2) Passar per caixa");
-        System.out.println("3) Mostrar carret de compra");
-        System.out.println("0) acabar");
-
-
-
         do {
+            System.out.println("-----------");
+            System.out.println("-- INICI --");
+            System.out.println("-----------");
+            System.out.println("1) Introduir producte");
+            System.out.println("2) Passar per caixa");
+            System.out.println("3) Mostrar carret de compra");
+            System.out.println("0) acabar");
+
             System.out.print("> ");
             opcio= utilities.introducirNumeroEntero(scan, 3, 0, false);
             //todo
@@ -30,7 +27,6 @@ public class Menu {
                 case 3:
                     Carrito.mostrarCarret();
                     break;
-
                 case 0:
                     System.out.println("Fins aviat!");
                 break;
