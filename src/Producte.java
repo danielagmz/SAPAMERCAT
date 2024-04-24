@@ -1,4 +1,4 @@
-public abstract class Producte {
+public abstract class Producte implements Comparable<Producte> {
     protected float preu;
     protected String nom;
     protected int codi;

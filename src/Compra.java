@@ -8,8 +8,20 @@ public class Compra {
         lista.add(producte);
     }
 
-    public static String obtenirNom(int codiBarres){
-        //todo que me obtenga el nombre con lamda expressions
-        return "";
+    public static List<Producte> getLista() {
+        return lista;
     }
+
+//    todo problema gigante porque no me guarda el codigo de barras la lista
+    public static String obtenirNom(int codiBarres){
+        String nombre;
+        nombre = lista.stream().filter(e -> e.getCodi()==codiBarres)
+                .map(Producte::getNom).findFirst().orElse("");
+        return nombre;
+    }
+    public static void vaciarCompra(){
+        lista.clear();
+        Carrito.limpiarCarrito();
+    }
+
 }

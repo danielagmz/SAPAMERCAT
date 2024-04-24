@@ -33,6 +33,17 @@ public class Alimentacio extends Producte {
 
     @Override
     public String toString() {
-        return String.format("Nom: %s,Preu: %.2f€,Caducitat: %s",nom,getPreu(),dataCaducitat);
+        return String.format("Codi: %d,Nom: %s,Preu: %.2f€,Caducitat: %s",getCodi(),nom,getPreu(),dataCaducitat);
+    }
+
+    @Override
+    public int compareTo(Producte p) {
+        Alimentacio prod=(Alimentacio) p;
+
+        if (this.getCodi() == prod.getCodi()){
+
+        }
+
+        return 0;
     }
 }

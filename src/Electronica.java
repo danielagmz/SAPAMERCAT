@@ -22,5 +22,12 @@ public class Electronica extends Producte{
     public String toString() {
         return String.format("Nom: %s,Preu: %.2f€,Dies de garantia: %s",nom,getPreu(),diesGarantia);
     }
+
+    @Override
+    public int compareTo(Producte p) {
+        Electronica prod=(Electronica) p;
+
+        return 0;
+    }
 }
 
