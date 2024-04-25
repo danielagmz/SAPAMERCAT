@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,7 @@ public class Carrito {
         quantificarProductes();
 
 //        for (String item : carretLista.keySet()) {
-//            System.out.printf("%s -> %d\n",item,carretLista.get(item));
+//            System.out.printf("%s -> %d\n",Compra.obtenirNom(item),carretLista.get(item));
 //        }
         carretLista.forEach((key,item) -> System.out.printf("%s -> %d\n",Compra.obtenirNom(key),carretLista.get(key)));
     }
@@ -35,6 +36,34 @@ public class Carrito {
 
     public static void limpiarCarrito(){
         carretLista.clear();
+        Compra.vaciarCompra();
+    }
+
+    public static void generarTicket(){
+        LocalDate data= LocalDate.now();
+        float total=0;
+
+        quantificarProductes();
+        System.out.println("-------------------------------");
+        System.out.println("          SAPAMERCAT           ");
+        System.out.println("-------------------------------");
+        System.out.println("Data: "+data);
+        System.out.println("-------------------------------");
+
+        carretLista.forEach(
+            (key,item) -> System.out.printf("%-15s %3d %3.2f€ %3.2f€\n",
+                    Compra.obtenirNom(key),
+                    carretLista.get(key),
+                    Compra.obtenirPreu(key),
+                    carretLista.get(key)*Compra.obtenirPreu(key)
+            )
+        );
+
+        System.out.println("-------------------------------");
+        for (Integer key : carretLista.keySet()) {
+            total+=carretLista.get(key)*Compra.obtenirPreu(key);
+        }
+        System.out.printf("Total: %.2f€",total);
     }
 
 }

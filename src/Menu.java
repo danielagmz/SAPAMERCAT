@@ -25,6 +25,13 @@ public class Menu {
                 case 1:
                     submenu();
                 break;
+                case 2:
+                    Carrito.generarTicket();
+                    Carrito.limpiarCarrito();
+                    System.out.println();
+                    System.out.println("Gracies per la seva compra!");
+
+                break;
                 case 3:
                     Carrito.mostrarCarret();
                     break;
@@ -32,7 +39,7 @@ public class Menu {
                     System.out.println("Fins aviat!");
                 break;
             }
-
+            System.out.println();
         } while (opcio!=0);
 
     }

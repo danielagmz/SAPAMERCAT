@@ -19,9 +19,14 @@ public class Compra {
                 .map(Producte::getNom).findFirst().orElse("");
         return nombre;
     }
+    public static Float obtenirPreu(int codiBarres){
+        Float preu;
+        preu = lista.stream().filter(e -> e.getCodi()==codiBarres)
+                .map(Producte::getPreu).findFirst().orElse(0F);
+        return preu;
+    }
     public static void vaciarCompra(){
         lista.clear();
-        Carrito.limpiarCarrito();
     }
 
 }
