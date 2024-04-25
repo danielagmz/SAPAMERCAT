@@ -40,8 +40,10 @@ public class Alimentacio extends Producte {
     public int compareTo(Producte p) {
         Alimentacio prod=(Alimentacio) p;
 
-        if (this.getCodi() == prod.getCodi()){
-
+        if (this.getCodi() > prod.getCodi()){
+            return 1;
+        }else if (this.getCodi() < prod.getCodi()){
+            return -1;
         }
 
         return 0;
