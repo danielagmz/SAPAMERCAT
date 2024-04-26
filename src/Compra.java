@@ -13,15 +13,15 @@ public class Compra {
     }
 
 //    todo problema gigante porque no me guarda el codigo de barras la lista
-    public static String obtenirNom(int codiBarres){
+    public static String obtenirNom(String codiBarres){
         String nombre;
-        nombre = lista.stream().filter(e -> e.getCodi()==codiBarres)
+        nombre = lista.stream().filter(e -> e.getCodi().equals(codiBarres))
                 .map(Producte::getNom).findFirst().orElse("");
         return nombre;
     }
-    public static Float obtenirPreu(int codiBarres){
+    public static Float obtenirPreu(String codiBarres){
         Float preu;
-        preu = lista.stream().filter(e -> e.getCodi()==codiBarres)
+        preu = lista.stream().filter(e -> e.getCodi().equals(codiBarres))
                 .map(Producte::getPreu).findFirst().orElse(0F);
         return preu;
     }

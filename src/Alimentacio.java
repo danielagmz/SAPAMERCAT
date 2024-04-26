@@ -1,11 +1,10 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 public class Alimentacio extends Producte {
     private String dataCaducitat;
 
-    public Alimentacio(float preu, String nom, int codi, String dataCaducitat) {
+    public Alimentacio(float preu, String nom, String codi, String dataCaducitat) {
         super(preu, nom, codi);
         this.dataCaducitat = dataCaducitat;
     }
@@ -33,19 +32,12 @@ public class Alimentacio extends Producte {
 
     @Override
     public String toString() {
-        return String.format("Codi: %d,Nom: %s,Preu: %.2f€,Caducitat: %s",getCodi(),nom,getPreu(),dataCaducitat);
+        return String.format("Codi: %s,Nom: %s,Preu: %.2f€,Caducitat: %s",getCodi(),nom,getPreu(),dataCaducitat);
     }
 
     @Override
     public int compareTo(Producte p) {
         Alimentacio prod=(Alimentacio) p;
-
-        if (this.getCodi() > prod.getCodi()){
-            return 1;
-        }else if (this.getCodi() < prod.getCodi()){
-            return -1;
-        }
-
-        return 0;
+        return this.getCodi().compareTo(prod.getCodi());
     }
 }

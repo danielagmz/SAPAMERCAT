@@ -1,9 +1,9 @@
 public abstract class Producte implements Comparable<Producte> {
     protected float preu;
     protected String nom;
-    protected int codi;
+    protected String codi;
 
-    public Producte(float preu, String nom, int codi) {
+    public Producte(float preu, String nom, String codi) {
         this.preu = preu;
         this.nom = nom;
         this.codi = codi;
@@ -25,11 +25,11 @@ public abstract class Producte implements Comparable<Producte> {
         this.nom = nom;
     }
 
-    public int getCodi() {
+    public String getCodi() {
         return codi;
     }
 
-    public void setCodi(int codi) {
+    public void setCodi(String codi) {
         this.codi = codi;
     }
 }

@@ -1,7 +1,7 @@
 public class Electronica extends Producte{
     private float diesGarantia;
 
-    public Electronica(float preu, String nom, int codi, float diesGarantia) {
+    public Electronica(float preu, String nom, String codi, float diesGarantia) {
         super(preu, nom, codi);
         this.diesGarantia = diesGarantia;
     }
@@ -26,13 +26,7 @@ public class Electronica extends Producte{
     @Override
     public int compareTo(Producte p) {
         Electronica prod=(Electronica) p;
-
-        if (this.getCodi() > prod.getCodi()){
-            return 1;
-        }else if (this.getCodi() < prod.getCodi()){
-            return -1;
-        }
-        return 0;
+        return this.getCodi().compareTo(prod.getCodi());
     }
 }
 

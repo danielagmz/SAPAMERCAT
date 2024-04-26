@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Carrito {
 
-    private static Map<Integer,Integer> carretLista=new HashMap<>();
+    private static Map<String,Integer> carretLista=new HashMap<>();
 
     public static void mostrarCarret(){
         quantificarProductes();
@@ -24,11 +24,11 @@ public class Carrito {
 //        int qtAntigua;
 //        for (Producte producte : Compra.lista) {
 //
-//            if (!(carretLista.containsKey(producte.getNom()))) {
-//                carretLista.put(producte.getNom(), 1);
+//            if (!(carretLista.containsKey(producte.getCodi()))) {
+//                carretLista.put(producte.getCodi(), 1);
 //            }else {
-//                qtAntigua= carretLista.get(producte.getNom());
-//                carretLista.replace(producte.getNom(), qtAntigua+1);
+//                qtAntigua= carretLista.get(producte.getCodi());
+//                carretLista.replace(producte.getCodi(), qtAntigua+1);
 //            }
 //            qtAntigua=0;
 //        }
@@ -51,7 +51,7 @@ public class Carrito {
         System.out.println("-------------------------------");
 
         carretLista.forEach(
-            (key,item) -> System.out.printf("%-15s %3d %3.2f€ %3.2f€\n",
+            (key,item) -> System.out.printf("%-15s %-3d %3.2f€ %3.2f€\n",
                     Compra.obtenirNom(key),
                     carretLista.get(key),
                     Compra.obtenirPreu(key),
@@ -60,7 +60,7 @@ public class Carrito {
         );
 
         System.out.println("-------------------------------");
-        for (Integer key : carretLista.keySet()) {
+        for (String key : carretLista.keySet()) {
             total+=carretLista.get(key)*Compra.obtenirPreu(key);
         }
         System.out.printf("Total: %.2f€",total);

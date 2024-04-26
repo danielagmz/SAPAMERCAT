@@ -29,7 +29,7 @@ public class Menu {
                     Carrito.generarTicket();
                     Carrito.limpiarCarrito();
                     System.out.println();
-                    System.out.println("Gracies per la seva compra!");
+                    System.out.println("\nGracies per la seva compra!");
 
                 break;
                 case 3:
@@ -103,8 +103,10 @@ public class Menu {
 
 
 
+
+
         try {
-            Compra.inserirProducte(new Textil(preu,nom,codiB,comp));
+            Compra.inserirProducte(new Textil(preu,nom,"T"+codiB,comp));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -132,7 +134,7 @@ public class Menu {
         dataCaducitat=scan.nextLine();
 
         try {
-            Compra.inserirProducte(new Alimentacio(preu,nom,codiB,dataCaducitat));
+            Compra.inserirProducte(new Alimentacio(preu,nom,"A"+codiB,dataCaducitat));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -162,7 +164,7 @@ public class Menu {
 
 
         try {
-            Compra.inserirProducte(new Electronica(preu,nom,codiB,garantia));
+            Compra.inserirProducte(new Electronica(preu,nom,"E"+codiB,garantia));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
