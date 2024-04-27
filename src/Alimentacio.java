@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Comparator;
 
 public class Alimentacio extends Producte {
     private String dataCaducitat;
@@ -35,9 +36,4 @@ public class Alimentacio extends Producte {
         return String.format("Codi: %s,Nom: %s,Preu: %.2f€,Caducitat: %s",getCodi(),nom,getPreu(),dataCaducitat);
     }
 
-    @Override
-    public int compareTo(Producte p) {
-        Alimentacio prod=(Alimentacio) p;
-        return this.getCodi().compareTo(prod.getCodi());
-    }
 }

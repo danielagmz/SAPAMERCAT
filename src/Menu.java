@@ -1,6 +1,12 @@
 import megaLibreria.utilities;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -136,7 +142,7 @@ public class Menu {
         try {
             Compra.inserirProducte(new Alimentacio(preu,nom,"A"+codiB,dataCaducitat));
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            registrarExcepcio(e.toString());
         }
 
     }
@@ -147,29 +153,67 @@ public class Menu {
         int codiB;
 
 
-        System.out.print("Nom producte: ");
-        nom=scan.nextLine();
+    do {
+        try {
+            System.out.print("Nom producte: ");
+            nom = scan.nextLine();
+            if (!Producte.comprovarNom(nom)) {
+                throw new IllegalArgumentException("El nombre no puede tener mas de 15 caracteres");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            registrarExcepcio(e.toString());
+            nom="";
+        }
+    }while (nom.isEmpty());
 
-        System.out.print("Preu: ");
-        preu=scan.nextFloat();
-        scan.nextLine();
+        do {
+            try {
+                System.out.print("Preu: ");
+                preu = scan.nextFloat();
+                scan.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Preu no valid");
+                registrarExcepcio(e.toString());
+                preu=0;
+                scan.nextLine();
 
-        System.out.print("Garantia (dies): ");
-        garantia=scan.nextInt();
-        scan.nextLine();
+            }
+        } while (preu==0);
 
-        System.out.print("Codi de barres: ");
-        codiB=scan.nextInt();
-        scan.nextLine();
+        garantia = utilities.introducirNumeroEntero(scan,"Garantia no valida","Garantia (dies): ");
+        codiB = utilities.introducirNumeroEntero(scan,"Codi no valid","Codi de Barres: ");
+
 
 
         try {
-            Compra.inserirProducte(new Electronica(preu,nom,"E"+codiB,garantia));
-        }catch (Exception e){
-            System.out.println(e.getMessage());
+            Compra.inserirProducte(new Electronica(preu, nom, "E" + codiB, garantia));
+        } catch (Exception e) {
+            registrarExcepcio(e.getMessage());
         }
-    }
 
+}
+public static void registrarExcepcio(String texto){
+    File exceptions=new File("./logs/Exceptions.dat");
+    List<String> excepcionesNoRegistradas=new ArrayList<>();
+    try {
+// todo por alguna razon no se crea el archivo
+        if (!exceptions.createNewFile() && !exceptions.exists()){
+            throw new IOException("No se ha podido crear el archivo");
+        }
+
+        PrintStream writer =new PrintStream(exceptions);
+        writer.println(texto);
+        writer.close();
+
+    } catch (FileNotFoundException e) {
+        System.out.println("El archivo de excepciones no existe");
+        excepcionesNoRegistradas.add(texto);
+
+    } catch (IOException e) {
+        System.out.println(e.getMessage());
+    }
+}
 
 
 

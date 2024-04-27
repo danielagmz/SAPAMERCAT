@@ -1,5 +1,5 @@
-12345,T-Shirt,100% Cotton,19.99
-23456,Jeans,98% Cotton, 39.99
-34567,Hoodie,50% Polyester 50% Cotton,29.99
-45678,Jacket,80% Nylon 20% Polyester,59.99
-56789,Socks,80% Cotton 15% Nylon 5% Spandex,9.99
+T12345;19.99
+T23456;39.99
+T34567;29.99
+T45678;59.99
+T56789;9.99

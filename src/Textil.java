@@ -1,4 +1,4 @@
-public class Textil extends Producte  {
+public class Textil extends Producte implements Comparable<Textil> {
     private String composicio;
 
     public Textil(float preu, String nom, String codi, String composicio) {
@@ -19,10 +19,7 @@ public class Textil extends Producte  {
         return String.format("Nom: %s,Preu: %.2f€,Composicio: %s",nom,preu,composicio);
     }
 
-
-    @Override
-    public int compareTo(Producte p) {
-        Textil prod=(Textil) p;
-        return this.composicio.compareTo(prod.composicio);
+    public int compareTo(Textil p) {
+        return this.composicio.compareTo(p.composicio);
     }
 }

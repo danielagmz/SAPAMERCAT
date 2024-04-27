@@ -1,4 +1,4 @@
-public abstract class Producte implements Comparable<Producte> {
+public abstract class Producte {
     protected float preu;
     protected String nom;
     protected String codi;
@@ -13,7 +13,7 @@ public abstract class Producte implements Comparable<Producte> {
         return preu;
     }
 
-    public void setPreu(int preu) {
+    public void setPreu(float preu) {
         this.preu = preu;
     }
 
@@ -32,4 +32,9 @@ public abstract class Producte implements Comparable<Producte> {
     public void setCodi(String codi) {
         this.codi = codi;
     }
+
+    public static boolean comprovarNom(String nom){
+        return nom.length() <= 15;
+    }
+
 }

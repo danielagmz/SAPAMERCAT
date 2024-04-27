@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Compra {
@@ -27,6 +28,10 @@ public class Compra {
     }
     public static void vaciarCompra(){
         lista.clear();
+    }
+
+    public static void eliminarTextils(){
+        lista.removeIf(prod -> prod instanceof Textil);
     }
 
 }

@@ -23,10 +23,10 @@ public class Electronica extends Producte{
         return String.format("Nom: %s,Preu: %.2f€,Dies de garantia: %s",nom,getPreu(),diesGarantia);
     }
 
-    @Override
-    public int compareTo(Producte p) {
-        Electronica prod=(Electronica) p;
-        return this.getCodi().compareTo(prod.getCodi());
-    }
+//    @Override
+//    public int compareTo(Producte p) {
+//        Electronica prod=(Electronica) p;
+//        return this.getCodi().compareTo(prod.getCodi());
+//    }
 }
 
