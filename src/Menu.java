@@ -126,18 +126,10 @@ public class Menu {
         int codiB;
 
 
-        System.out.print("Nom producte: ");
-        nom=scan.nextLine();
-
-        System.out.print("Preu: ");
-        preu=scan.nextFloat();
-        scan.nextLine();
-        System.out.print("Codi de barres: ");
-        codiB=scan.nextInt();
-        scan.nextLine();
-
-        System.out.print("Data de caducitat (dd/mm/aaaa): ");
-        dataCaducitat=scan.nextLine();
+        nom=Producte.introducirNom(scan);
+        preu=Producte.introducirPreu(scan);
+        codiB=utilities.introducirNumeroEntero(scan,"Codi no valid","Codi de Barres: ");
+        dataCaducitat=Alimentacio.introducirDataCaducitat(scan);
 
         try {
             Compra.inserirProducte(new Alimentacio(preu,nom,"A"+codiB,dataCaducitat));
@@ -152,39 +144,10 @@ public class Menu {
         float preu;
         int codiB;
 
-
-    do {
-        try {
-            System.out.print("Nom producte: ");
-            nom = scan.nextLine();
-            if (!Producte.comprovarNom(nom)) {
-                throw new IllegalArgumentException("El nombre no puede tener mas de 15 caracteres");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            registrarExcepcio(e.toString());
-            nom="";
-        }
-    }while (nom.isEmpty());
-
-        do {
-            try {
-                System.out.print("Preu: ");
-                preu = scan.nextFloat();
-                scan.nextLine();
-            } catch (InputMismatchException e) {
-                System.out.println("Preu no valid");
-                registrarExcepcio(e.toString());
-                preu=0;
-                scan.nextLine();
-
-            }
-        } while (preu==0);
-
+        nom=Producte.introducirNom(scan);
+        preu=Producte.introducirPreu(scan);
         garantia = utilities.introducirNumeroEntero(scan,"Garantia no valida","Garantia (dies): ");
         codiB = utilities.introducirNumeroEntero(scan,"Codi no valid","Codi de Barres: ");
-
-
 
         try {
             Compra.inserirProducte(new Electronica(preu, nom, "E" + codiB, garantia));
@@ -212,6 +175,7 @@ public static void registrarExcepcio(String texto){
 
     } catch (IOException e) {
         System.out.println(e.getMessage());
+        excepcionesNoRegistradas.add(texto);
     }
 }
 
