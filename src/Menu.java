@@ -5,13 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
     static Scanner scan = new Scanner(System.in);
-
+   static List<String> excepciones=new ArrayList<>();
     public static void menuPrincipal(){
         int opcio;
 
@@ -26,7 +25,7 @@ public class Menu {
 
             System.out.print("> ");
             opcio= utilities.introducirNumeroEntero(scan, 3, 0, false);
-            //todo
+
             switch (opcio){
                 case 1:
                     submenu();
@@ -36,7 +35,7 @@ public class Menu {
                     Carrito.limpiarCarrito();
                     System.out.println();
                     System.out.println("\nGracies per la seva compra!");
-
+                    registrarExcepcions();
                 break;
                 case 3:
                     Carrito.mostrarCarret();
@@ -52,7 +51,6 @@ public class Menu {
 
     static void submenu(){
         int opcio;
-        int input;
 
         do {
             System.out.println("--------------");
@@ -66,7 +64,6 @@ public class Menu {
             System.out.print("> ");
             opcio= utilities.introducirNumeroEntero(scan, 3, 0, false);
             switch (opcio){
-                //todo comprobaciones
                 case 1:
                     System.out.println("Afergir aliment");
                     introduirAlimentacio();
@@ -93,28 +90,19 @@ public class Menu {
         int codiB;
 
 
-        System.out.print("Nom producte: ");
-        nom=scan.nextLine();
-
-        System.out.print("Preu: ");
-        preu=scan.nextFloat();
-        scan.nextLine();
+        nom=Producte.introducirNom(scan);
+        preu=Producte.introducirPreu(scan);
 
         System.out.print("Composicio: ");
         comp=scan.nextLine();
 
-        System.out.print("Codi de barres: ");
-        codiB=scan.nextInt();
-        scan.nextLine();
-
-
-
+        codiB=utilities.introducirNumeroEntero(scan,"Codi no valid","Codi de Barres: ");
 
 
         try {
             Compra.inserirProducte(new Textil(preu,nom,"T"+codiB,comp));
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            guardarExcepcio(e.toString());
         }
 
     }
@@ -134,7 +122,7 @@ public class Menu {
         try {
             Compra.inserirProducte(new Alimentacio(preu,nom,"A"+codiB,dataCaducitat));
         }catch (Exception e){
-            registrarExcepcio(e.toString());
+            guardarExcepcio(e.toString());
         }
 
     }
@@ -152,33 +140,31 @@ public class Menu {
         try {
             Compra.inserirProducte(new Electronica(preu, nom, "E" + codiB, garantia));
         } catch (Exception e) {
-            registrarExcepcio(e.getMessage());
+            guardarExcepcio(e.toString());
         }
 
 }
-public static void registrarExcepcio(String texto){
+public static void guardarExcepcio(String texto){
+    excepciones.add(texto);
+
+}
+public static void registrarExcepcions(){
     File exceptions=new File("./logs/Exceptions.dat");
-    List<String> excepcionesNoRegistradas=new ArrayList<>();
     try {
-// todo por alguna razon no se crea el archivo
         if (!exceptions.createNewFile() && !exceptions.exists()){
             throw new IOException("No se ha podido crear el archivo");
         }
-
         PrintStream writer =new PrintStream(exceptions);
-        writer.println(texto);
+        excepciones.forEach(writer::println);
         writer.close();
 
     } catch (FileNotFoundException e) {
         System.out.println("El archivo de excepciones no existe");
-        excepcionesNoRegistradas.add(texto);
-
     } catch (IOException e) {
         System.out.println(e.getMessage());
-        excepcionesNoRegistradas.add(texto);
     }
+    excepciones.clear();
 }
-
 
 
 

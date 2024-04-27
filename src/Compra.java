@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Compra {
@@ -13,7 +12,7 @@ public class Compra {
         return lista;
     }
 
-//    todo problema gigante porque no me guarda el codigo de barras la lista
+
     public static String obtenirNom(String codiBarres){
         String nombre;
         nombre = lista.stream().filter(e -> e.getCodi().equals(codiBarres))

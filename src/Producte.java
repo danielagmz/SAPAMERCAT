@@ -51,7 +51,7 @@ public abstract class Producte {
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-                Menu.registrarExcepcio(e.toString());
+                Menu.guardarExcepcio(e.toString());
                 nom="";
             }
         }while (nom.isEmpty());
@@ -68,7 +68,7 @@ public abstract class Producte {
                 scan.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Preu no valid");
-                Menu.registrarExcepcio(e.toString());
+                Menu.guardarExcepcio(e.toString()+": "+"Preu no valid");
                 preu=0f;
                 scan.nextLine();
 

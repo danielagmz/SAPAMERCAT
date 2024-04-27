@@ -1,10 +1,6 @@
-import megaLibreria.utilities;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
-import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -15,8 +11,7 @@ public class Alimentacio extends Producte {
         super(preu, nom, codi);
         this.dataCaducitat = dataCaducitat;
     }
-    /*ToDo probar si da bien el precio
-    */
+
     public float getPreu() {
         LocalDate dataActual=LocalDate.now();
         String[] fecha =dataCaducitat.split("[/-]");
@@ -32,7 +27,7 @@ public class Alimentacio extends Producte {
     public String getDataCaducitat() {
         return dataCaducitat;
     }
-// ToDo verificar que este en el formato adecuado, quiza regular expresion
+
     public void setDataCaducitat(String dataCaducitat) {
         this.dataCaducitat = dataCaducitat;
     }
@@ -100,12 +95,12 @@ public class Alimentacio extends Producte {
 
             } catch (InputMismatchException e) {
                 System.out.println(e.getMessage());
-                Menu.registrarExcepcio(e.toString());
+                Menu.guardarExcepcio(e.toString());
                 dataCaducitat="";
 
             }catch (DateTimeParseException e2){
                 System.out.println("la data no es valida");
-                Menu.registrarExcepcio(e2.toString());
+                Menu.guardarExcepcio(e2.toString());
                 dataCaducitat="";
             }
 

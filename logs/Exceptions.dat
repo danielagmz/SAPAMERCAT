@@ -1,1 +1,6 @@
+java.lang.IllegalArgumentException: El nombre no puede tener mas de 15 caracteres
+java.util.InputMismatchException:Preu no valid
+java.util.InputMismatchException:Preu no valid
+java.util.InputMismatchException: El mes no es correcto
+java.util.InputMismatchException: El mes no es correcto
 java.util.InputMismatchException: La data ha d'estar en format MM/DD/AAAA
