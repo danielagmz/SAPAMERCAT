@@ -18,7 +18,7 @@ public class Textil extends Producte implements Comparable<Textil> {
     public String toString() {
         return String.format("Nom: %s,Preu: %.2f€,Composicio: %s",nom,preu,composicio);
     }
-
+// todo comparable
     public int compareTo(Textil p) {
         return this.composicio.compareTo(p.composicio);
     }

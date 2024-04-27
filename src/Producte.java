@@ -1,6 +1,9 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * superclase
+ */
 public abstract class Producte {
     protected float preu;
     protected String nom;
@@ -36,16 +39,28 @@ public abstract class Producte {
         this.codi = codi;
     }
 
+    /**
+     * funcion para comprobar que el nombre sea valido
+     * @param nom nombre a comprobar
+     * @return retorna true si es valido y false si no
+     */
     public static boolean comprovarNom(String nom){
         return nom.length() <= 15;
     }
 
+    /**
+     * funcion que se encarga de preguntar el nombre hasta que sea valido
+     * @param scan scan para leer l'input
+     * @return el nombre correcto para pasarlo al constructor
+     */
     public static String introducirNom(Scanner scan){
         String nom;
         do {
             try {
                 System.out.print("Nom producte: ");
                 nom = scan.nextLine();
+
+
                 if (!Producte.comprovarNom(nom)) {
                     throw new IllegalArgumentException("El nombre no puede tener mas de 15 caracteres");
                 }
@@ -59,6 +74,11 @@ public abstract class Producte {
         return nom;
     }
 
+    /**
+     * funcion que se encarga de pedir el precio hasta que se valido
+     * @param scan scaner para leer el input
+     * @return retorna el precio listo para pasarlo al constructor
+     */
     public static Float introducirPreu(Scanner scan){
         float preu;
         do {

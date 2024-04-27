@@ -4,7 +4,13 @@ import java.time.temporal.ChronoUnit;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Alimentacio extends Producte {
+/**
+ * subclase alimentacio
+ */
+public class Alimentacio extends Producte{
+    /**
+     * atributo privado que se usa para calcular el precio
+     */
     private String dataCaducitat;
 
     public Alimentacio(float preu, String nom, String codi, String dataCaducitat) {
@@ -12,6 +18,10 @@ public class Alimentacio extends Producte {
         this.dataCaducitat = dataCaducitat;
     }
 
+    /**
+     * sobreescritura del precio de la clase Producto
+     * @return retorna el precio a partir de una formula
+     */
     public float getPreu() {
         LocalDate dataActual=LocalDate.now();
         String[] fecha =dataCaducitat.split("[/-]");
@@ -37,6 +47,11 @@ public class Alimentacio extends Producte {
         return String.format("Codi: %s,Nom: %s,Preu: %.2f€,Caducitat: %s",getCodi(),nom,getPreu(),dataCaducitat);
     }
 
+    /**
+     * Funcion encargada de gestionar las posibles excepciones al introducir una fecha de caducidad
+     * @param scan scanner para leer el input
+     * @return retorna la fecha comprovada para pasar al constructor
+     */
     public static String introducirDataCaducitat(Scanner scan){
         String dataCaducitat;
         String[] fecha;
@@ -49,13 +64,11 @@ public class Alimentacio extends Producte {
             try {
                 System.out.print("Data de caducitat (dd/mm/aaaa): ");
                 dataCaducitat=scan.nextLine();
-
+                // expresion regular para comprobar que se introduzca un formato correcto
                 if (!(dataCaducitat.matches("\\b[0-9]{1,2}[-/][0-9]{1,2}[/-]([0-9]{4}|[0-9]{2})\\b"))) {
                     throw new InputMismatchException("La data ha d'estar en format MM/DD/AAAA");
                 }
-
-
-
+                // comprobaciones de coherencia a nivel de mes, año y dia
                 fecha=dataCaducitat.split("[/-]");
 
                 if (fecha[0].length()==1){
@@ -81,17 +94,9 @@ public class Alimentacio extends Producte {
                 if (dia > diesMes(mes,anio) ){
                     throw new InputMismatchException("El dia no es correcto");
                 }
-//
-//                if (data.getDayOfMonth() > data.lengthOfMonth()) {
-//                    throw new InputMismatchException("El mes no es correcte");
-//                }
-//
-//                if (data.getMonthValue() == 2 && data.getDayOfMonth() == 29) {
-//                    if (!comprovarAnioBisiesto(data.getYear())) {
-//                        throw new InputMismatchException("El año no es bisiesto");
-//                    }
-//                }
-                dataCaducitat=String.format("%s/%s/%s",fecha[0],fecha[1],fecha[2]);
+                // asignamos un string format por si el usuario introduce una variacion de d/m/aa
+                // que internamente salga en formato dd/mm/aaaa y evitar errores
+                dataCaducitat= String.format("%s/%s/%s",fecha[0],fecha[1],fecha[2]);
 
             } catch (InputMismatchException e) {
                 System.out.println(e.getMessage());
@@ -108,6 +113,13 @@ public class Alimentacio extends Producte {
 
         return dataCaducitat;
     }
+
+    /**
+     * Funcion que retorna los dias de un mes
+     * @param mes mes a comprobar
+     * @param any año para comprobar los años bisiestos
+     * @return retorna los dias o -1 si el mes no es valido
+     */
     private static int diesMes(int mes, int any) {
         if (mes >= 1 && mes <= 12) {
             if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12)

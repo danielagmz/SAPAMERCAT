@@ -8,9 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * clase que gestiona las diferentes pantallas que ve el usuario
+ */
 public class Menu {
+    /**
+     * instanciacion del scanner para leer inputs
+     */
     static Scanner scan = new Scanner(System.in);
+    /**
+     * lista para guardar todas las excepciones producidas
+     */
    static List<String> excepciones=new ArrayList<>();
+
+    /**
+     * Funcion que se encarga de gestionar las acciones principales del programa
+     */
     public static void menuPrincipal(){
         int opcio;
 
@@ -24,6 +37,7 @@ public class Menu {
             System.out.println("0) acabar");
 
             System.out.print("> ");
+            // funcion que se encarga de preguntar el numero enterio hasta que este en un rango valido
             opcio= utilities.introducirNumeroEntero(scan, 3, 0, false);
 
             switch (opcio){
@@ -35,6 +49,7 @@ public class Menu {
                     Carrito.limpiarCarrito();
                     System.out.println();
                     System.out.println("\nGracies per la seva compra!");
+                    // registrar excepciones durante la ejecucion en el archivo correspondiente
                     registrarExcepcions();
                 break;
                 case 3:
@@ -49,6 +64,9 @@ public class Menu {
 
     }
 
+    /**
+     * funcion que gestiona la introduccion de productos en el programa
+     */
     static void submenu(){
         int opcio;
 
@@ -144,11 +162,21 @@ public class Menu {
         }
 
 }
-public static void guardarExcepcio(String texto){
-    excepciones.add(texto);
 
-}
-public static void registrarExcepcions(){
+    /**
+     * Funcion que guarda todas las excepciones en un array que luego sera usado
+     * para printarlas todas en el archivo Excepciones.dat
+     * @param texto indica el texto de la excepcion
+     */
+    public static void guardarExcepcio(String texto){
+        excepciones.add(texto);
+    }
+
+    /**
+     * Funcion que se encarga de crear el archivo de excepciones
+     * y recorrer el array pintando cada entrada en una linea diferente
+     */
+    public static void registrarExcepcions(){
     File exceptions=new File("./logs/Exceptions.dat");
     try {
         if (!exceptions.createNewFile() && !exceptions.exists()){
@@ -157,6 +185,9 @@ public static void registrarExcepcions(){
         PrintStream writer =new PrintStream(exceptions);
         excepciones.forEach(writer::println);
         writer.close();
+//  si por lo que sea el archivo no se puede encontrar o crear,
+//  se imprime por pantalla un error pero las excepciones siguen guardadas internamente
+//  hasta que se pueda solucionar el problema
 
     } catch (FileNotFoundException e) {
         System.out.println("El archivo de excepciones no existe");
