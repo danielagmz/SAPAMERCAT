@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class Carrito {
 //            System.out.printf("%s -> %d\n",Compra.obtenirNom(item),carretLista.get(item));
 //        }
 
-        // codigo refactorizado para usar una exrpesion lambda
+        // codigo refactorizado para usar una expresion lambda
         carretLista.forEach((key,item) -> System.out.printf("%s -> %d\n",Compra.obtenirNom(key),carretLista.get(key)));
     }
 
@@ -38,6 +39,14 @@ public class Carrito {
         List<String[]> lineas=new ArrayList<>();
         String s;
         try {
+            if (!update.getParentFile().mkdirs() && !update.getParentFile().exists()){
+                throw new IOException("No se ha podido crear el directorio updates");
+            }
+
+            if (!update.createNewFile() && !update.exists()){
+                throw new IOException("No se ha podido crear el archivo updates");
+            }
+
             Scanner reader=new Scanner(update);
             while (reader.hasNext()){
                 s=reader.nextLine().trim();
@@ -50,8 +59,11 @@ public class Carrito {
             // en caso de que no se puedan comprovar los precios
             Compra.eliminarTextils();
             System.out.println("No s'ha pogut comprovar el preu dels productes textils\n Si us plau consultar al personal");
+            Menu.guardarExcepcio(e.toString());
+        } catch (IOException e2) {
+            Menu.guardarExcepcio(e2.toString());
         }
-            // filtro las instancias de textil y compruebo si este producto especifico hay que actulizarlo o no
+        // filtro las instancias de textil y compruebo si este producto especifico hay que actulizarlo o no
         Compra.getLista().stream().filter(p -> p instanceof Textil)
                 .forEach(textil -> {
                         for (String[] linea : lineas) {

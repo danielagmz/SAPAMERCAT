@@ -56,18 +56,20 @@ public class Menu {
                     Carrito.mostrarCarret();
                     break;
                 case 0:
+                    System.exit(1);
                     System.out.println("Fins aviat!");
                 break;
             }
             System.out.println();
-        } while (opcio!=0);
+        } while (true);
+
 
     }
 
     /**
      * funcion que gestiona la introduccion de productos en el programa
      */
-    static void submenu(){
+    public static void submenu(){
         int opcio;
 
         do {
@@ -110,12 +112,9 @@ public class Menu {
 
         nom=Producte.introducirNom(scan);
         preu=Producte.introducirPreu(scan);
-
         System.out.print("Composicio: ");
         comp=scan.nextLine();
-
-        codiB=utilities.introducirNumeroEntero(scan,"Codi no valid","Codi de Barres: ");
-
+        codiB=Textil.introducirCodi(scan);
 
         try {
             Compra.inserirProducte(new Textil(preu,nom,"T"+codiB,comp));
@@ -179,6 +178,9 @@ public class Menu {
     public static void registrarExcepcions(){
     File exceptions=new File("./logs/Exceptions.dat");
     try {
+        if (!exceptions.getParentFile().mkdirs() && !exceptions.getParentFile().exists()){
+            throw new IOException("No se ha podido crear el directorio logs");
+        }
         if (!exceptions.createNewFile() && !exceptions.exists()){
             throw new IOException("No se ha podido crear el archivo");
         }
